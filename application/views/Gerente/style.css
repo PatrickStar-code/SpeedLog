@@ -1,0 +1,59 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    background-image: url("../IMGS/banner.jpg ");
+}
+
+input {
+    display: #002d2b;
+    height: 55px;
+    width: 400px;
+    margin: 10px;
+    border-radius: 30px;
+    border:1px solid black ;
+    font-size: 16pt;
+    padding: 10px 20px;
+
+}
+
+form{
+    background-color: #002d2b;
+}
+
+div#corpo-form{
+    /*background-color: #002d2b;*/
+    width: 420px;
+    margin: 150px auto 0px auto;
+}
+
+div#corpo-form h1{
+    text-align: center;
+    padding: 20px;
+}
+
+a{
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    display: block;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
