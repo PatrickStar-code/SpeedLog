@@ -27,41 +27,41 @@
         </div>
         <form method="post" id="registro" class="p-0">
             <div class="mt-5">
-                <input type="text" name="nome" id="nome" class="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent " placeholder="Nome">
+                <input type="text" name="nome" id="nome" class="dark:text-white block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent " placeholder="Nome">
             </div>
             <div class="mt-5">
-                <input type="email" name="email" id="email" class="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent " placeholder="Email">
+                <input type="email" name="email" id="email" class="dark:text-white block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent " placeholder="Email">
                 <small id="erro_email" class="font-bold  text-red-500"></small>
 
             </div>
             <div class="grid grid-cols-2 mt-5">
 
                 <div class="mr-3">
-                   <input type="text" name="cep" id="cep" class="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent " placeholder="Cep">
+                   <input type="text" name="cep" id="cep" class="dark:text-white block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent " placeholder="Cep">
                    <small id="erro_cep" class="font-bold  text-red-500"></small>
                 </div>
                 <div>
-                    <input type="text" name="cpf" id="cpf" class="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent " placeholder="Cpf">
+                    <input type="text" name="cpf" id="cpf" class="dark:text-white block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent " placeholder="Cpf">
                     <small id="erro_cpf" class="font-bold  text-red-500"></small>
                 </div>
             </div>
 
             <div class="mt-5">
-                <input type="text" name="telefone" id="telefone" class="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent " placeholder="Telefone">
+                <input type="text" name="telefone" id="telefone" class="dark:text-white block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent " placeholder="Telefone">
                 <small id="erro_tel" class="font-bold text-red-500"></small>
 
             </div>
             <div class="mt-5">
-                <input type="text" name="login" id="login" class="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent " placeholder="Login">
+                <input type="text" name="login" id="login" class="dark:text-white block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent " placeholder="Login">
                 <small id="erro_login" class="font-bold  text-red-500"></small>
 
             </div>
             <div class="grid grid-cols-2 mt-5">
                 <div class="mr-3">
-                    <input type="password" name="senha" id="senha" class="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent  " placeholder="Senha">
+                    <input type="password" name="senha" id="senha" class="dark:text-white block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent  " placeholder="Senha">
                 </div>
                 <div>
-                    <input type="password" name="r_senha" id="r_senha" class="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent  " placeholder="Repita a Senhas">
+                    <input type="password" name="r_senha" id="r_senha" class="dark:text-white block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent  " placeholder="Repita a Senhas">
                 </div>
             </div>
 
