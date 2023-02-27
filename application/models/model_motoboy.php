@@ -1,6 +1,27 @@
 <?php
 class Model_motoboy extends CI_Model
 {
+    public function cadastrar($nome, $email, $foto_motoboy, $cpf, $telefone, $placa, $login, $senha, $cnh, $foto_cnh_motoboy, $conta_corrente, $agencia)
+    {
+        $dados = array(
+            "nome_motoboy" => $nome,
+            "email_motoboy" => $email,
+            "foto_motoboy" => $foto_motoboy,
+            "cpf_motoboy" => $cpf,
+            "telefone_motoboy" => $telefone,
+            "placa_moto" => $placa,
+            "login_motoboy" => $login,
+            "senha_motoboy" => $senha,
+            "cnh_motoboy" => $cnh,
+            "cnh_foto_motoboy" => $foto_cnh_motoboy,
+            "conta_corrente" => $conta_corrente,
+            "agencia" => $agencia,
+            "status_cnh_motoboy" => "Em Analise"
+        );
+
+        $this->db->insert("motoboy", $dados);
+    } 
+
 
     public function verificar_email($email)
     {
@@ -27,16 +48,6 @@ class Model_motoboy extends CI_Model
         return $query->num_rows();
     }
 
-    public function verificar_acesso($login, $senha)
-    {
-        $this->db->where("login_motoboy", $login);
-        $this->db->where("senha_motoboy", $senha);
-        $this->db->or_where("email_motoboy", $login);
-        $this->db->where("senha_motoboy", $senha);
-        $usuario = $this->db->get("motoboy")->row_array();
-        return $usuario;
-    }
-
     public function verificar_cnh($cnh)
     {
         $this->db->where("cnh_motoboy", $cnh);
@@ -56,22 +67,16 @@ class Model_motoboy extends CI_Model
         $this->db->where("placa_moto", $placa);
         $query = $this->db->get("motoboy");
         return $query->num_rows();
-    }
+    } 
 
-    public function cadastrar($nome, $telefone, $email, $cep, $cpf, $login, $senha, $img)
+    public function verificar_acesso($login, $senha)
     {
-        $dados = array(
-            "nome_motoboy" => $nome,
-            "telefone_motoboy" => $telefone,
-            "email_motoboy" => $email,
-            "cpf_motoboy" => $cpf,
-            "login_motoboy" => $login,
-            "senha_motoboy" => $senha,
-            "foto_motoboy" => $img
-
-        );
-
-        $this->db->insert("motoboy", $dados);
-        return "Cadastro Realizado Com Sucesso";
+        $this->db->where("login_motoboy", $login);
+        $this->db->where("senha_motoboy",$senha);
+        $this->db->or_where("email_motoboy", $login);
+        $this->db->where("senha_motoboy",$senha);
+        $usuario = $this->db->get("motoboy")->row_array();
+        return $usuario;
+    
     }
 }

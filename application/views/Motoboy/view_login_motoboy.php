@@ -1,4 +1,4 @@
-<body class="h-full bg-[#00968f]">
+<body class="h-full bg-[#00968f] overflow-hidden">
 
     <?php include("componentes/login_mb.php") ?>
 
@@ -22,6 +22,8 @@
     });
 
 
+    $('#conta').mask('0000 0000 0000 0000')
+    $('#agencia').mask('0000')
 
     $('#telefone').mask('(00)00000-0000');
     $('#cpf').mask('000.000.000-00', {
@@ -161,7 +163,8 @@
                         $("#conta").addClass("border-red-500");
                         existe_conta_bd = true;
                     }
-                })
+                }
+            )
         } else {
             $("#erro_conta").html("Insira Corretamente a conta");
             $("#conta").removeClass("border-gray-300");
@@ -220,11 +223,36 @@
             })
     });
 
+    $("#logar").submit(function(e) {
+        e.preventDefault();
+        var form_data = new FormData(this);
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url("Motoboy/logar") ?>",
+            data: form_data,
+            success: function(data) {
+                if (data == 1) {
+                    $("#email_logar").val("");
+                    $("#senha_logar").val("");
+                    window.location.replace("<?php echo site_url("motoboy/home") ?>");
+                } else {
+
+                }
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        })
+
+    });
+
     $("#registro").submit(function(e) {
         e.preventDefault();
         if (existe_login_bd == false) {
-            if ($("senha").val() == $("#tentativa").val()) {
+            if ($("#senha").val() == $("#tentativa").val()) {
                 $("#erro_senha").html("");
+                $("#tentativa").addClass("border-gray-300");
+                $("#tentativa").removeClass("border-red-500");
                 var form_data = new FormData(this);
                 senha = $("#senha").val();
                 r_senha = $("#tentativa").val();
@@ -233,17 +261,42 @@
                     type: "POST",
                     url: "<?php echo site_url("Motoboy/registrar") ?>",
                     data: form_data,
+                    beforeSend: function() {
+                        //mostrando a tela de loading
+                        $("loader").removeClass("hidden");
+                    },
                     success: function(data) {
+                        $("loader").addClass("hidden");
+                        $("#nome").val("");
+                        $("#email").val("");
+                        $("#telefone").val("");
+                        $("#cpf").val("");
+                        $("#nmr_cnh").val("");
+                        $("#foto_cnh").val("");
+                        $("#conta").val("");
+                        $("#agencia").val("");
+                        $("#placa").val("");
+                        $("#foto").val("");
+                        $("#login").val("");
+                        $("#senha").val("");
+                        $("#tentativa").val("");
                         $("#reg_3").hide();
                         $("#reg_1").show();
                         $("#etapa3").removeClass("text-[#00fff4]");
                         $("#etapa1").addClass("text-[#00fff4]");
+                        $("#toast-success").removeClass('hidden');
+
+
                     },
                     cache: false,
                     contentType: false,
                     processData: false
                 })
 
+            } else {
+                $("#erro_senha").html("Senha não coincidem");
+                $("#tentativa").removeClass("border-gray-300");
+                $("#tentativa").addClass("border-red-500");
             }
         }
     });
@@ -252,7 +305,7 @@
 
 
     function myFunction() {
-        var x = document.getElementById("senha");
+        var x = document.getElementById("senha_logar");
         if (x.type === "password") {
             x.type = "text";
         } else {

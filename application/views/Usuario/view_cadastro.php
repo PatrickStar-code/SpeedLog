@@ -169,8 +169,6 @@
                         $("#senha").val("");
                         $("#r_senha").val("");
                         $("#toast-success").removeClass('hidden');
-
-
                     },
                     cache: false,
                     contentType: false,
