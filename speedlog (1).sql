@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 18-Fev-2023 às 01:10
+-- Tempo de geração: 27-Fev-2023 às 01:33
 -- Versão do servidor: 10.4.27-MariaDB
 -- versão do PHP: 8.1.12
 
@@ -53,16 +53,17 @@ CREATE TABLE `entregas` (
   `horario_previsto` datetime DEFAULT NULL,
   `bairro_origem` mediumtext NOT NULL,
   `bairro_entrega` mediumtext NOT NULL,
+  `tempo_estimado` time NOT NULL,
+  `distancia_percorrer` varchar(100) NOT NULL,
   `numero_destino_entrega` varchar(45) NOT NULL,
   `numero_origem_entrega` int(11) NOT NULL,
-  `entrega_entrega` mediumtext NOT NULL,
   `peso_entrega` float NOT NULL,
   `distancia_entrega` float NOT NULL,
   `tempo_deslocamento` datetime NOT NULL,
   `motoboy_idmotoboy` int(11) DEFAULT NULL,
   `Usuario_idUsuario` int(11) NOT NULL,
   `complemento_entrega` mediumtext NOT NULL,
-  `Fragil` text NOT NULL
+  `assinado_por` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -74,15 +75,61 @@ CREATE TABLE `entregas` (
 CREATE TABLE `motoboy` (
   `idmotoboy` int(11) NOT NULL,
   `nome_motoboy` varchar(45) NOT NULL,
-  `cep_motoboy` varchar(45) NOT NULL,
   `email_motoboy` varchar(200) NOT NULL,
   `criacao_func` datetime NOT NULL DEFAULT current_timestamp(),
-  `estrelas_func` float DEFAULT NULL,
   `foto_motoboy` mediumtext NOT NULL,
   `cpf_motoboy` varchar(45) NOT NULL,
   `telefone_motoboy` varchar(45) NOT NULL,
-  `placa_moto` varchar(45) NOT NULL
+  `placa_moto` varchar(45) NOT NULL,
+  `login_motoboy` varchar(100) NOT NULL,
+  `senha_motoboy` varchar(100) NOT NULL,
+  `cnh_motoboy` varchar(11) NOT NULL,
+  `cnh_foto_motoboy` varchar(100) NOT NULL,
+  `conta_corrente` varchar(8) NOT NULL,
+  `agencia` varchar(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `preco_km`
+--
+
+CREATE TABLE `preco_km` (
+  `id_km` int(11) NOT NULL,
+  `km_rodado` int(20) NOT NULL,
+  `valor_km` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `preco_km`
+--
+
+INSERT INTO `preco_km` (`id_km`, `km_rodado`, `valor_km`) VALUES
+(1, 1, 0.5);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `preco_peso`
+--
+
+CREATE TABLE `preco_peso` (
+  `id` int(11) NOT NULL,
+  `peso_min` decimal(4,2) NOT NULL,
+  `peso_max` decimal(4,2) NOT NULL,
+  `preco` decimal(4,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `preco_peso`
+--
+
+INSERT INTO `preco_peso` (`id`, `peso_min`, `peso_max`, `preco`) VALUES
+(1, '0.00', '1.00', '3.00'),
+(2, '1.00', '3.00', '5.00'),
+(3, '3.00', '8.00', '9.00'),
+(4, '8.00', '12.00', '12.00');
 
 -- --------------------------------------------------------
 
@@ -102,6 +149,13 @@ CREATE TABLE `usuario` (
   `foto_usuario` varchar(45) DEFAULT NULL,
   `criacao_user` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Extraindo dados da tabela `usuario`
+--
+
+INSERT INTO `usuario` (`idUsuario`, `nome_usuario`, `login_usuario`, `senha_usuario`, `cpf_usuario`, `cep_usuario`, `email_usuario`, `telefone_usuario`, `foto_usuario`, `criacao_user`) VALUES
+(1, 'Patrick Almeida', '123', '202cb962ac59075b964b07152d234b70', '072.839.060-45', '64004-305', 'teste@gmail.com', '(86)99184-7682', 'ft_padrao_user.png', '2023-02-25 15:55:15');
 
 --
 -- Índices para tabelas despejadas
@@ -126,6 +180,18 @@ ALTER TABLE `entregas`
 --
 ALTER TABLE `motoboy`
   ADD PRIMARY KEY (`idmotoboy`);
+
+--
+-- Índices para tabela `preco_km`
+--
+ALTER TABLE `preco_km`
+  ADD PRIMARY KEY (`id_km`);
+
+--
+-- Índices para tabela `preco_peso`
+--
+ALTER TABLE `preco_peso`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Índices para tabela `usuario`
@@ -156,10 +222,22 @@ ALTER TABLE `motoboy`
   MODIFY `idmotoboy` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de tabela `preco_km`
+--
+ALTER TABLE `preco_km`
+  MODIFY `id_km` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de tabela `preco_peso`
+--
+ALTER TABLE `preco_peso`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restrições para despejos de tabelas

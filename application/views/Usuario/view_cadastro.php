@@ -44,7 +44,6 @@
         e.preventDefault();
         cep = $("#cep").val();
         const newcep = cep.replace('-', '');
-        console.log(newcep);
 
         if (cep.length == 9) {
             const url = "https://viacep.com.br/ws/" + newcep + "/json/"
@@ -54,6 +53,7 @@
                 dataType: "json",
                 success: function(response) {
                     if ("erro" in response) {
+                        $("#erro_cep").html("");
                         $("#erro_cep").html("Cep Não Encontrado");
                         $("#cep").addClass("ring-1 ring-red-400");
                         existe_cep = false;

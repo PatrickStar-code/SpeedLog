@@ -1,6 +1,10 @@
 <?php include("Components/navbar_usuario.php") ?>
-<?php include("Components/hero_section.php") ?>
+<?php include("Components/carrossel_usuario.php") ?>
 <?php include("Components/sections.php") ?>
+<?php include("Components/hero_section.php") ?>
+<?php include("Components/section_img.php")?>
+<?php include("Components/faq_usuario.php") ?>
+<?php include("Components/footer_usuario.php") ?>
 
 <script>
     $("#logar").submit(function(e) {

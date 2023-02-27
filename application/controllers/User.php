@@ -1,5 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+header('Access-Control-Allow-Origin: *');
+
 
 class User extends CI_Controller
 {
@@ -65,5 +67,23 @@ class User extends CI_Controller
             echo 0;
         }
 
+    }
+
+    public function deslogar(){
+        unset($_SESSION['login_cliente']); 
+        redirect(site_url("User"));
+
+    }
+
+    public function calcular_peso(){
+        $this->load->model("model_user");
+        $peso = $this->input->post("peso");
+        if($peso <= 12.00){
+            $retorno = $this->model_user->gerar_valor_peso($peso);
+            echo $retorno["preco"];
+        }
+        else{
+            echo 0;
+        }
     }
 }

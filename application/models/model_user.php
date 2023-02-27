@@ -1,6 +1,10 @@
 <?php
 class Model_user extends CI_Model
 {
+    public function gerar_valor_peso($peso_prod){
+        $query = $this->db->query("SELECT preco FROM preco_peso WHERE peso_min <= $peso_prod AND peso_max >= $peso_prod");
+        return $query->row_array();
+    }
 
     public function verificar_email($email)
     {
@@ -24,7 +28,7 @@ class Model_user extends CI_Model
     {
         $this->db->where("telefone_usuario", $telefone);
         $query = $this->db->get("usuario");
-        return $query->result();
+        return $query->num_rows();
     }
 
     public function verificar_acesso($login, $senha)
@@ -55,4 +59,6 @@ class Model_user extends CI_Model
         $this->db->insert("usuario", $dados);
         return "Cadastro Realizado Com Sucesso";
     }
+
+    
 }

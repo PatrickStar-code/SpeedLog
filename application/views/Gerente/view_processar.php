@@ -1,0 +1,1 @@
+<form method="post" action="view_processar.php">
