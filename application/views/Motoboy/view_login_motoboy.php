@@ -188,7 +188,7 @@
                         $("#placa").removeClass("border-red-500");
                         $("#placa").addClass("border-gray-300");
                     } else {
-                        $("#erro_placa").html("conta Ja Cadastrado");
+                        $("#erro_placa").html("Placa Ja Cadastrado");
                         $("#placa").removeClass("border-gray-300");
                         $("#placa").addClass("border-red-500");
                         existe_placa_bd = true;
@@ -263,10 +263,10 @@
                     data: form_data,
                     beforeSend: function() {
                         //mostrando a tela de loading
-                        $("loader").removeClass("hidden");
+                        $("#loader").removeClass("hidden");
                     },
                     success: function(data) {
-                        $("loader").addClass("hidden");
+                        $("#loader").addClass("hidden");
                         $("#nome").val("");
                         $("#email").val("");
                         $("#telefone").val("");

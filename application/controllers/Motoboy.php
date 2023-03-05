@@ -6,6 +6,11 @@ header('Access-Control-Allow-Origin: *');
 class Motoboy extends  CI_Controller
 {
 
+    public function deslogar(){
+        unset($_SESSION['login_motoboy']);
+        redirect(site_url("motoboy"));
+    }
+
     public function index()
     {
         $this->load->view('view_top');
@@ -19,8 +24,13 @@ class Motoboy extends  CI_Controller
     public function home()
     {
         $this->load->view('view_top');
+        $this->load->view('motoboy/componentes/sidebar_mb');
         $this->load->view('Motoboy/view_home_motoboy');
         $this->load->view('view_bot');
+
+        if (!isset($_SESSION["login_motoboy"])) {
+            redirect("motoboy");
+        }
     }
 
 

@@ -22,7 +22,7 @@ class Model_motoboy extends CI_Model
         $this->db->insert("motoboy", $dados);
     } 
 
-
+  
     public function verificar_email($email)
     {
         $this->db->where("email_motoboy", $email);

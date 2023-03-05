@@ -1,4 +1,3 @@
-<?php include("Components/navbar_usuario.php") ?>
 <?php include("Components/carrossel_usuario.php") ?>
 <?php include("Components/sections.php") ?>
 <?php include("Components/hero_section.php") ?>
