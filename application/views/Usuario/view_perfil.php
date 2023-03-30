@@ -1,10 +1,19 @@
-<?php include("components/perfil.php");
-?>
+<body class="bg-gray-200 h-screen w-screen">
+
+    <div class="bg-gray-200">
+        <?php include("components/perfil.php");
+        ?>
+
+    </div>
+</body>
 <script>
+    $("#salvar").hide();
+
     $(document).ready(function() {
-        $("#salvar").hide();
         $("#cep_edit").mask("00000-000")
-        $("#tel_edit").mask("(00)00000-0000")
+            $("#tel_edit").mask("(00)00000-0000")
+            $("#escondido").removeClass("hidden");
+        $("#loader2").hide();
 
     });
 
@@ -24,6 +33,12 @@
         $("#tel_edit").show();
         $("#file").show();
 
+        $("#nome_edit").addClass("outline outline-2 outline-[#00968f]");
+        $("#email_edit").addClass("outline outline-2 outline-[#00968f]");
+        $("#cep_edit").addClass("outline outline-2 outline-[#00968f]");
+        $("#tel_edit").addClass("outline outline-2 outline-[#00968f]");
+    
+
     });
 
     $("#editar_salvar").submit(function(e) {
@@ -34,13 +49,13 @@
             url: "<?php echo site_url("User/editar") ?>",
             data: form_data,
             beforeSend: function() {
-                        //mostrando a tela de loading
-                        $("#loader").removeClass("hidden");
-                    },
+                //mostrando a tela de loading
+                $("#loader2").removeClass("hidden");
+            },
             success: function(data) {
-                $("#loader").addClass("hidden");
+                $("#loader2").addClass("hidden");
 
-                if(data == "Dados Editados"){
+                if (data == "Dados Editados") {
                     location.reload();
                 }
             },

@@ -6,7 +6,40 @@ header('Access-Control-Allow-Origin: *');
 class Motoboy extends  CI_Controller
 {
 
-    public function deslogar(){
+    public function perfil()
+    {
+        if (!isset($_SESSION["login_motoboy"])) {
+            redirect(site_url("motoboy"));
+        } else {
+            $this->load->model("model_motoboy");
+            $id = $_SESSION["login_motoboy"]["idmotoboy"];
+            $dados["retorno"] = $this->model_motoboy->get_pedidos_realizados($id);
+
+            $this->load->view('view_top');
+            $this->load->view('motoboy/componentes/sidebar_mb');
+            $this->load->view('motoboy/componentes/loader_mb');
+            $this->load->view('Motoboy/view_perfil_motoboy',$dados);
+            $this->load->view('view_bot');
+        }
+    }
+    public function finalizadas()
+    {
+        if (!isset($_SESSION["login_motoboy"])) {
+            redirect(site_url("motoboy"));
+        } else {
+            $this->load->model("model_motoboy");
+            $id = $_SESSION["login_motoboy"]["idmotoboy"];
+            $dados["retorno"] = $this->model_motoboy->gerar_tabela_finalizados($id);
+            $this->load->view('view_top');
+            $this->load->view('motoboy/componentes/sidebar_mb');
+            $this->load->view('motoboy/componentes/loader_mb');
+            $this->load->view('Motoboy/view_finalizados_motoboy',$dados);
+            $this->load->view('view_bot');
+        }
+    }
+
+    public function deslogar()
+    {
         unset($_SESSION['login_motoboy']);
         redirect(site_url("motoboy"));
     }
@@ -23,16 +56,91 @@ class Motoboy extends  CI_Controller
     }
     public function home()
     {
-        $this->load->view('view_top');
-        $this->load->view('motoboy/componentes/sidebar_mb');
-        $this->load->view('Motoboy/view_home_motoboy');
-        $this->load->view('view_bot');
-
         if (!isset($_SESSION["login_motoboy"])) {
             redirect("motoboy");
+        } else {
+            $this->load->model("model_motoboy");
+            $id = $_SESSION["login_motoboy"]["idmotoboy"];
+            $dados["retorno"] = $this->model_motoboy->get_dados($id);
+            $dados["retorno2"] = $this->model_motoboy->get_total($id);
+            $dados["entregas"] = $this->model_motoboy->get_entregas($id);
+            $this->load->view('view_top');
+            $this->load->view('motoboy/componentes/sidebar_mb');
+            $this->load->view('motoboy/componentes/loader_mb');
+            $this->load->view('Motoboy/view_home_motoboy', $dados);
+            $this->load->view('view_bot');
         }
     }
+    public function aceitar_pedido()
+    {
+        $id_pedido = $_POST["id"];
+        $id_motoboy = $_SESSION["login_motoboy"]["idmotoboy"];
 
+        $this->load->model("model_motoboy");
+        $this->model_motoboy->aceitar_pedido($id_pedido, $id_motoboy);
+    }
+    public function iniciar_transporte()
+    {
+        $id_pedido = $_POST["id"];
+        $id_motoboy = $_SESSION["login_motoboy"]["idmotoboy"];
+
+        $this->load->model("model_motoboy");
+        echo $retorno =  $this->model_motoboy->iniciar_transporte($id_pedido, $id_motoboy);
+    }
+
+    public function entregue()
+    {
+        $id_pedido = $_POST["id"];
+        $assinatura = $_POST["assinatura"];
+
+        $this->load->model("model_motoboy");
+        $this->model_motoboy->entregue($id_pedido, $assinatura);
+    }
+
+    public function recusar_pedido()
+    {
+        $id_pedido = $_POST["id"];
+        $id_motoboy = $_SESSION["login_motoboy"]["idmotoboy"];
+
+        $this->load->model("model_motoboy");
+        $this->model_motoboy->recusar_pedido($id_pedido, $id_motoboy);
+    }
+
+    public function entregas()
+    {
+        if (!isset($_SESSION["login_motoboy"])) {
+            redirect("motoboy");
+        } else {
+            $this->load->model("model_motoboy");
+            $id = $_SESSION["login_motoboy"]["idmotoboy"];
+            $dados["retorno"] = $this->model_motoboy->gerar_tabela($id);
+            $this->load->view('view_top');
+            $this->load->view('motoboy/componentes/sidebar_mb');
+            $this->load->view('motoboy/componentes/loader_mb');
+            $this->load->view('Motoboy/view_entregas_motoboy', $dados);
+            $this->load->view('view_bot');
+        }
+    }
+    public function prencher_tabela_aceitos()
+    {
+        $this->load->model("model_motoboy");
+    }
+
+    public function aceitos()
+    {
+        if (!isset($_SESSION["login_motoboy"])) {
+            redirect("motoboy");
+        } else {
+            $this->load->model("model_motoboy");
+            $id = $_SESSION["login_motoboy"]["idmotoboy"];
+            $dados["retorno"] = $this->model_motoboy->gerar_tabela_aceitos($id);
+            $this->load->view('view_top');
+            $this->load->view('motoboy/componentes/sidebar_mb');
+            $this->load->view('motoboy/componentes/loader_mb');
+            $this->load->view('Motoboy/view_aceitos', $dados);
+            $this->load->view('view_bot');
+        }
+    }
 
     public function verificar()
     {
@@ -107,6 +215,14 @@ class Motoboy extends  CI_Controller
 
 
 
-            $this->model_motoboy->cadastrar($nome, $email, $file_name_motoboy, $cpf, $telefone, $placa, $login, $senha, $cnh,$file_name_cnh, $conta_corrente, $agencia);
+        $this->model_motoboy->cadastrar($nome, $email, $file_name_motoboy, $cpf, $telefone, $placa, $login, $senha, $cnh, $file_name_cnh, $conta_corrente, $agencia);
+    }
+
+    public function pegar_info()
+    {
+        $this->load->model("model_motoboy");
+        $id = $_POST['id'];
+        $data =  $this->model_motoboy->pegar_info($id);
+        echo json_encode($data);
     }
 }

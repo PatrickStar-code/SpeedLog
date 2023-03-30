@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 03-Mar-2023 às 01:07
+-- Tempo de geração: 28-Mar-2023 às 18:51
 -- Versão do servidor: 10.4.27-MariaDB
 -- versão do PHP: 8.1.12
 
@@ -33,7 +33,7 @@ CREATE TABLE `administrador` (
   `id_adm` int(11) NOT NULL,
   `login_adm` varchar(45) NOT NULL,
   `senha_adm` varchar(45) NOT NULL,
-  `nome_adm` varchar(45) NOT NULL,
+  `nome_adm` text NOT NULL,
   `telefone_adm` varchar(45) NOT NULL,
   `cep_adm` varchar(45) NOT NULL,
   `cpf_adm` varchar(45) NOT NULL,
@@ -45,7 +45,7 @@ CREATE TABLE `administrador` (
 --
 
 INSERT INTO `administrador` (`id_adm`, `login_adm`, `senha_adm`, `nome_adm`, `telefone_adm`, `cep_adm`, `cpf_adm`, `email_adm`) VALUES
-(1, '123', '123', 'Patrick', '31232321', '32133214', '321321321', 'patrick@gmail.com');
+(1, '123', '202cb962ac59075b964b07152d234b70', 'Patrick', '31232321', '32133214', '321321321', 'patrick@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -70,8 +70,10 @@ CREATE TABLE `entregas` (
   `tempo_transporte_km` text NOT NULL,
   `tempo_minutos` int(11) NOT NULL,
   `valor_total` float NOT NULL,
+  `valor_70p` float NOT NULL,
   `data_pedido` datetime NOT NULL DEFAULT current_timestamp(),
   `status_entrega` text NOT NULL,
+  `assinado_por` text NOT NULL,
   `hora_inicio_transporte` datetime DEFAULT NULL,
   `hora_previsto_tranporte` datetime DEFAULT NULL,
   `motoboy_idmotoboy` int(11) DEFAULT NULL,
@@ -82,9 +84,12 @@ CREATE TABLE `entregas` (
 -- Extraindo dados da tabela `entregas`
 --
 
-INSERT INTO `entregas` (`idEntregas`, `desc_entrega`, `peso_entrega`, `complemento_entrega`, `cep_origem_entrega`, `numero_origem_entrega`, `bairro_origem`, `logradouro_origem`, `cep_destino_entrega`, `numero_destino_entrega`, `bairro_destino`, `logradouro_destino`, `distancia_km`, `tempo_transporte_km`, `tempo_minutos`, `valor_total`, `data_pedido`, `status_entrega`, `hora_inicio_transporte`, `hora_previsto_tranporte`, `motoboy_idmotoboy`, `Usuario_idUsuario`) VALUES
-(2, 'Açucar, Feijão, Arroz', 5, 'Não', '36071-070', 194, 'Tiguera', 'Rua José Francisco Garcia', '36035-720', 214, 'Serra D\'Água', 'Rua Eduardo Sathler', '8.5 km', '20 mins', 20, 19.25, '2023-03-02 10:13:38', 'Pendente', NULL, NULL, NULL, 1),
-(3, '31', 0.13, '123', '36071-070', 31, 'Tiguera', 'Rua José Francisco Garcia', '22793-720', 41, 'Barra da Tijuca', 'Rua Rino Levi', '198.8 km', '3 hour 0 mins', 180, 156.4, '2023-03-02 19:30:59', 'Pendente', NULL, NULL, NULL, 1);
+INSERT INTO `entregas` (`idEntregas`, `desc_entrega`, `peso_entrega`, `complemento_entrega`, `cep_origem_entrega`, `numero_origem_entrega`, `bairro_origem`, `logradouro_origem`, `cep_destino_entrega`, `numero_destino_entrega`, `bairro_destino`, `logradouro_destino`, `distancia_km`, `tempo_transporte_km`, `tempo_minutos`, `valor_total`, `valor_70p`, `data_pedido`, `status_entrega`, `assinado_por`, `hora_inicio_transporte`, `hora_previsto_tranporte`, `motoboy_idmotoboy`, `Usuario_idUsuario`) VALUES
+(1, 'teste', 0.31, '31', '36071-070', 45, 'Tiguera', 'Rua José Francisco Garcia', '22041-011', 46, 'Copacabana', 'Rua Santa Clara', '190.1 km', '2 hour 56 mins', 176, 150.85, 105.6, '2023-03-20 08:19:18', 'Em Transporte', '', '2023-03-20 11:18:22', '2023-03-20 14:14:22', 4, 1),
+(2, 'teste', 2.5, 'Pão de pacote', '36071-070', 150, 'Tiguera', 'Rua José Francisco Garcia', '36071-060', 162, 'Lourdes', 'Rua Jardelino de Souza', '434 m', '1 min', 1, 222.3, 155.61, '2023-03-20 08:27:49', 'Em Transporte', '', '2023-03-20 11:18:34', '2023-03-20 11:19:34', 4, 2),
+(3, 'teste', 5, 'não pode abrir a caixa', '36035-720', 2, 'Serra D\'Água', 'Rua Eduardo Sathler', '36035-700', 4, 'Serra D\'Água', 'Rua Maria Aladia', '289 m', '1 min', 1, 153.8, 107.66, '2023-03-20 09:14:29', 'Entregue', 'jurandiz porlantes', '2023-03-20 09:17:53', '2023-03-20 09:18:53', 4, 1),
+(4, 'teste', 0.01, 'Pão de pacote', '36071-070', 150, 'Tiguera', 'Rua José Francisco Garcia', '36071-060', 162, 'Lourdes', 'Rua Jardelino de Souza', '434 m', '1 min', 1, 220.3, 154.21, '2023-03-20 10:53:34', 'Em Transporte', '', '2023-03-20 11:18:38', '2023-03-20 11:19:38', 4, 3),
+(5, 'teste', 0.41, '41', '36071-070', 41, 'Tiguera', 'Rua José Francisco Garcia', '22041-011', 41, 'Copacabana', 'Rua Santa Clara', '190.1 km', '2 hour 56 mins', 176, 150.85, 105.6, '2023-03-20 11:52:00', 'Pendente', '', NULL, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -94,7 +99,7 @@ INSERT INTO `entregas` (`idEntregas`, `desc_entrega`, `peso_entrega`, `complemen
 
 CREATE TABLE `motoboy` (
   `idmotoboy` int(11) NOT NULL,
-  `nome_motoboy` varchar(45) NOT NULL,
+  `nome_motoboy` text NOT NULL,
   `email_motoboy` varchar(200) NOT NULL,
   `criacao_func` datetime NOT NULL DEFAULT current_timestamp(),
   `foto_motoboy` mediumtext NOT NULL,
@@ -115,9 +120,10 @@ CREATE TABLE `motoboy` (
 --
 
 INSERT INTO `motoboy` (`idmotoboy`, `nome_motoboy`, `email_motoboy`, `criacao_func`, `foto_motoboy`, `cpf_motoboy`, `telefone_motoboy`, `placa_moto`, `login_motoboy`, `senha_motoboy`, `cnh_motoboy`, `cnh_foto_motoboy`, `conta_corrente`, `agencia`, `status_cnh_motoboy`) VALUES
-(4, 'Patrick Almeida', 'teste@gmail.com', '2023-02-27 14:50:23', 'd9d7ad8b56cc1808f8fb662dc1dabbe5.png', '072.839.060-45', '(32)13312-3213', '3213212', '123', '202cb962ac59075b964b07152d234b70', '32132132132', '032becddbab30e7e2d0f88c20e1e35b7.jpg', '3123', '3213', 'Em Analise'),
-(5, 'Marcelo Augusto', 'marceloapafs@gmail.com', '2023-02-28 08:26:55', '2c8a22eed25742b58c4eeb7cb2096c13.jpg', '159.678.945-75', '(32)99138-5129', 'mg45425', 'marcelo', '9880c35d8804ed40f467de976963966b', '25415564154', 'b65fcf66558229c99d470f6a5d2ef3f4.jpg', '1541 515', '9541', 'Em Analise'),
-(6, 'Nelsin', 'nelsin@gmail.com', '2023-03-01 10:34:43', 'b8281c70e2ecd0b4eec31cb744c95072.jpg', '100.973.916-60', '(32)12345-6789', '3322313', '321', 'caf1a3dfb505ffed0d024130f58c5cfa', '12345678912', '3d044213e2197990512fe37f34d6bde5.jpg', '1231 232', '2312', 'Em Analise');
+(4, 'Patrick Almeida', 'teste@gmail.com', '2023-02-27 14:50:23', 'd9d7ad8b56cc1808f8fb662dc1dabbe5.png', '072.839.060-45', '(32)13312-3213', '3213212', '123', '202cb962ac59075b964b07152d234b70', '32132132132', '032becddbab30e7e2d0f88c20e1e35b7.jpg', '3123', '3213', 'Aceito'),
+(5, 'Marcelo August1', 'marceloapafs@gmail.com', '2023-02-28 08:26:55', 'a844382bf2622eb133c8437d70f8cd9e.jpg', '159.678.945-75', '(32) 99138-5112', 'mg45423', 'marcelo', '9880c35d8804ed40f467de976963966b', '25415564153', 'dd780929f1b69434898f5634040b0905.jpg', '12312', '9542', 'Negado'),
+(6, 'Nelsin', 'nelsin@gmail.com', '2023-03-01 10:34:43', 'b8281c70e2ecd0b4eec31cb744c95072.jpg', '100.973.916-60', '(32)12345-6789', '3322313', '321', 'caf1a3dfb505ffed0d024130f58c5cfa', '12345678912', '17fba51fe4fe2a2488e364cb12c1ebe1.jpg', '1231 232', '2312', 'Em Analise'),
+(7, 'anteteguêmon', 'oanteteguemon@mail.cm', '2023-03-20 09:26:06', 'bd38a346591c7c0a4daa54d3ca38b8b7.png', '683.834.836-66', '(26)83834-8366', '2683834', 'antedeguemon', '0425bdfb7df6c8d4e95d2801c6593274', '26838348366', 'b4e7906a74463f44debf34e87b31cb3c.jpg', '2683 ', '3666', 'Em Analise');
 
 -- --------------------------------------------------------
 
@@ -188,7 +194,7 @@ INSERT INTO `preco_tempo` (`id_tempo`, `tempo_rodado`, `valor_tempo`) VALUES
 
 CREATE TABLE `usuario` (
   `idUsuario` int(11) NOT NULL,
-  `nome_usuario` varchar(45) NOT NULL,
+  `nome_usuario` text NOT NULL,
   `login_usuario` varchar(100) NOT NULL,
   `senha_usuario` varchar(45) NOT NULL,
   `cpf_usuario` varchar(45) NOT NULL,
@@ -196,15 +202,19 @@ CREATE TABLE `usuario` (
   `email_usuario` text NOT NULL,
   `telefone_usuario` varchar(45) NOT NULL,
   `foto_usuario` varchar(45) DEFAULT NULL,
-  `criacao_user` datetime NOT NULL DEFAULT current_timestamp()
+  `criacao_user` datetime NOT NULL DEFAULT current_timestamp(),
+  `hash_key` varchar(256) DEFAULT NULL,
+  `hash_expiry` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Extraindo dados da tabela `usuario`
 --
 
-INSERT INTO `usuario` (`idUsuario`, `nome_usuario`, `login_usuario`, `senha_usuario`, `cpf_usuario`, `cep_usuario`, `email_usuario`, `telefone_usuario`, `foto_usuario`, `criacao_user`) VALUES
-(1, 'Patrick Almeida', '123', '202cb962ac59075b964b07152d234b70', '072.839.060-45', '64004-305', 'teste@gmail.com', '(86)99184-7682', 'ft_padrao_user.png', '2023-02-25 15:55:15');
+INSERT INTO `usuario` (`idUsuario`, `nome_usuario`, `login_usuario`, `senha_usuario`, `cpf_usuario`, `cep_usuario`, `email_usuario`, `telefone_usuario`, `foto_usuario`, `criacao_user`, `hash_key`, `hash_expiry`) VALUES
+(1, 'Patrick Almeida', '123', '202cb962ac59075b964b07152d234b70', '072.839.060-45', '64004-305', 'teste@gmail.com', '(86)99184-7682', 'ft_padrao_user.png', '2023-02-25 15:55:15', NULL, NULL),
+(2, 'Marcelo', 'marcelo', '202cb962ac59075b964b07152d234b70', '235.421.321-56', '36071-070', '0000874901@senaimgaluno.com.br', '(32)99154-8752', 'cf983e47cfc2b2042676e2e3ee854b4d.jpg', '2023-03-20 08:24:27', NULL, NULL),
+(3, 'Lasio', 'lala', '202cb962ac59075b964b07152d234b70', '212.125.154-51', '36123-000', 'lasio@gmail.com', '(32)99165-4564', 'ft_padrao_user.png', '2023-03-20 10:53:11', NULL, NULL);
 
 --
 -- Índices para tabelas despejadas
@@ -268,13 +278,13 @@ ALTER TABLE `administrador`
 -- AUTO_INCREMENT de tabela `entregas`
 --
 ALTER TABLE `entregas`
-  MODIFY `idEntregas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idEntregas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `motoboy`
 --
 ALTER TABLE `motoboy`
-  MODIFY `idmotoboy` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idmotoboy` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de tabela `preco_km`
@@ -298,7 +308,7 @@ ALTER TABLE `preco_tempo`
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restrições para despejos de tabelas

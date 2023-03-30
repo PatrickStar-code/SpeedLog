@@ -30,18 +30,20 @@
             <a href="<?php echo site_url("User") ?>">
                 <div id="user_caminho" class="grid h-48 card bg-base-500 rounded-box place-items-center bg-no-repeat bg-center bg-contain" style="background-image:  url(<?php echo base_url("assets/IMGS/cliente.png") ?>)"></div>
             </a>
+            <span class="lg:hidden text-green-400">Cliente</span>
 
             <div class="divider"></div>
-
-            <a href="<?php echo site_url("gerente") ?>">
-                <div id="gerente_caminho" class="grid h-48 card bg-base-500 rounded-box place-items-center bg-no-repeat bg-center bg-contain" style="background-image:  url(<?php echo base_url("assets/IMGS/adm.png") ?>)"></div>
-            </a>
-
-            <div class="divider"></div>
-
+            
             <a href="<?php echo site_url("motoboy") ?>">
                 <div id="motoboy_caminho" class="grid h-48 card bg-base-500 rounded-box place-items-center bg-no-repeat bg-center bg-contain" style="background-image:  url(<?php echo base_url("assets/IMGS/motoboy.png") ?>)"></div>
             </a>
+            <span class="lg:hidden text-green-400">Motoboy</span>
+            <div class="divider "></div>
+
+            <a href="<?php echo site_url("grente") ?>">
+                <div id="gerente_caminho" class="grid h-48 card bg-base-500 rounded-box place-items-center bg-no-repeat bg-center bg-contain" style="background-image:  url(<?php echo base_url("assets/IMGS/adm.png") ?>)"></div>
+            </a>
+            <span class="lg:hidden text-green-400">Administrador</span>
         </div>
     </div>
 </section>

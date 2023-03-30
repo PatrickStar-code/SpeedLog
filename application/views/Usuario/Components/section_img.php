@@ -2,7 +2,7 @@
     <div class="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
         <div class="font-light text-gray-500 sm:text-lg dark:text-gray-400">
             <h2 class="mb-4 text-4xl font-extrabold text-gray-900 dark:text-white">Sobre Nós</h2>
-            <p class="mb-4">Somos uma empresa de tranporte privado, </p>
+            <p class="mb-4">A SPEED LOG tem buscado a excelência no transporte rodoviário para atender com transparência, inovação e tecnologia seus clientes. Entendemos a necessidade do “para ontem” , com isso, trabalhamos em sinergia as necessidades de nossos clientes, em tempo, prazo e custos. Atuamos em todo território nacional, especializado em transportes emergenciais – Spot que atendem situações de tempo de trânsito crítico e demandas especiais de clientes que exigem agendamento, atendimento noturno, exposições e eventos com descarga e carregamento datados, busca romper barreiras para o atendimento diferencial aos clientes flexibilizando operações e se disponibilizando para adequações necessárias.</p>
         </div>
         <div class="grid grid-cols-2 gap-4 mt-8">
             <img class="w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/content/office-long-2.png" alt="office content 1">

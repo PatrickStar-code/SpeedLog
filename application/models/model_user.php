@@ -7,6 +7,8 @@ class Model_user extends CI_Model
         return $query->row_array();
     }
 
+  
+  
     public function gerar_valor_distancia($distancia)
     {
         $query = $this->db->query("SELECT valor_km FROM preco_km WHERE km_rodado <= $distancia ORDER BY km_rodado DESC limit 1  ");
@@ -18,6 +20,20 @@ class Model_user extends CI_Model
         return $query->row_array();
     }
 
+    public function get_total($id){
+        $query = $this->db->query("SELECT COUNT(*) as Pedidos FROM entregas WHERE Usuario_idUsuario  = $id");
+        return $query->row_array();
+    }
+
+    public function getHashDetais($hash){
+       $query = $this->db->query("SELECT * from usuario WHERE hash_key = '$hash'");
+       if($query->num_rows()==1){
+        return $query->row();
+       }
+       else{
+        return false;
+       }
+    }
 
     public function verificar_email($email)
     {
@@ -72,6 +88,23 @@ class Model_user extends CI_Model
         return "Cadastro Realizado Com Sucesso";
     }
 
+    public function verificar_email_senha($info){
+        $this->db->where("email_usuario", $info);
+        $query = $this->db->get("usuario");
+        if($query->num_rows() == 1){
+           return $query->row();
+        }
+        else{
+            return false;
+        };
+    }
+
+    public function udateHash($data,$email){
+        $this->db->where('email_usuario',$email);
+        $this->db->update('usuario',$data);
+    }
+
+
     public function cadastrar_encomenda($desc, $peso, $complemento, $origem, $origem_n, $bairro_origem, $log_origem, $destino, $destino_n, $bairro_destino, $log_destino, $distancia, $tempo_estimado, $valor_total, $cod, $tempo_mins)
     {
         $dados = array(
@@ -92,7 +125,8 @@ class Model_user extends CI_Model
             "status_entrega" => "Pendente",
             "Usuario_idUsuario" => $cod,
             "motoboy_idmotoboy" => null,
-            "tempo_minutos" => $tempo_mins
+            "tempo_minutos" => $tempo_mins,
+            "valor_70p" => number_format($valor_total * 0.70, 2, ".", "")
         );
 
         $insert = $this->db->insert('entregas', $dados);
@@ -105,7 +139,7 @@ class Model_user extends CI_Model
 
     public function dados_tabela($cod_cliente)
     {
-        $query = $this->db->query("SELECT  *,date_format(hora_inicio_transporte,'%d/%e/%Y') as data_inicio,date_format(hora_previsto_tranporte,'%d/%e/%Y') as data_previsto FROM entregas LEFT JOIN motoboy ON entregas.motoboy_idmotoboy   = motoboy.idmotoboy");
+        $query = $this->db->query("SELECT  *,date_format(hora_inicio_transporte,'%d/%e/%Y') as data_inicio,date_format(hora_previsto_tranporte,'%d/%e/%Y') as data_previsto FROM entregas LEFT JOIN motoboy ON entregas.motoboy_idmotoboy   = motoboy.idmotoboy WHERE Usuario_idUsuario = $cod_cliente");
         $query_result = $query->result();
         return($query_result);
     }
@@ -128,8 +162,12 @@ class Model_user extends CI_Model
         else{
             return "Erro";
         }
-
-
-
+    }
+    public function nova_senha($data,$email){
+        $this->db->where("email_usuario",$email);
+        $query = $this->db->update("usuario",$data);
+        if($query){
+            return true;
+        }
     }
 }

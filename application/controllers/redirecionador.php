@@ -19,7 +19,7 @@ class Redirecionador extends CI_Controller {
 		$local = array(
 			"Motoboy" => $this->load->view('Motoboy/view_login_motoboy'),
 			"Cliente" => $this->load->view('Usuario/view_home_user'),
-			"Gerente" => $this->load->view('Gerente/view_login_adm')
+			"Gerente" => $this->load->view('Gerente/view_login_gerente')
 		);
 
 
