@@ -1,6 +1,5 @@
 ﻿# SPEEDLOG
 ## REQUISITOS DO SISTEMA
-## SpeedLog
 
 A SpeedLog é uma empresa que oferece serviços de entrega rápida utilizando o serviço de motoboys em Juiz de Fora. A missão da SpeedLog é fortalecer o comércio local, oferecendo soluções que facilitem e agilizem o transporte de mercadorias. Atualmente, o atendimento é feito por telefone e funciona da seguinte forma:
 
