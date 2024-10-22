@@ -2,7 +2,7 @@
 <script src="https://cdn.tailwindcss.com"></script>
 
 <!-- Google Api -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDASjGayDJEw8y5WhnaJ0p24Usfi__YX80"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=Key"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 
