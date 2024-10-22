@@ -53,8 +53,7 @@ Você e sua equipe foram contratados para resolver o problema do atendimento e c
 Infelizmente devido o uso de api paga do google o sistema nao esta funcionando,caso deseje utilizar solicito a troca das keys da api do google e distance matrix<br>
 
 #### E na área de Google API no componente Top
-###### Exemplo que se encontra no código:
 
-![image](https://github.com/PatrickStar-code/SpeedLog/assets/89866722/70c57a80-3484-4aa2-ac0b-c5f2298271fd)
+
 ## Funções perdidas no sistema
 ##### Devido a perda email organizacional do senai devido minha formatura não sera possivel utilizar a função de recuperar senha 
