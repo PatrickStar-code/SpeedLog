@@ -670,7 +670,7 @@
 
                                 $.get('https://api.distancematrix.ai/maps/api/distancematrix/json?origins=' +
                                     string_origem + '&destinations=' + string_destino +
-                                    '&key=cDlxP6ko5QtbGoTJpGgkwsg6xDLsa',
+                                    '&key=key',
                                     function(data) {
                                         $("#tempo_estimado").val(data["rows"][0][
                                                 "elements"
