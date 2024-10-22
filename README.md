@@ -52,7 +52,7 @@ Você e sua equipe foram contratados para resolver o problema do atendimento e c
 ## COMO UTILIZAR
 Infelizmente devido o uso de api paga do google o sistema nao esta funcionando,caso deseje utilizar solicito a troca das keys da api do google e distance matrix<br>
 
-#### E na área de Google API no componente Links Top
+#### Uma na área do Cliente no componente de navbar E no componente Links Top
 
 
 ## Funções perdidas no sistema
